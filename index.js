@@ -18,94 +18,170 @@ WHEN I decide to finish building my team
 THEN I exit the application, and the HTML is generated 
 */
 
-
-
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-
+const HTML = "";
+const generateManager = require("./templates/manager");
+const generateEngineer = require("./templates/engineer");
+const generateIntern = require("./templates/intern");
+const generateHTML = require("./templates/index");
 
 const managerSetup = () => {
-     inquirer.prompt([
-        {
-            type: 'input',
-            name: 'manager',
-            message: 'What is the name of the Team Manager?  (required)',
-            validate: managerInput => {
-                if (managerInput) {
-                    return true;
-                } else {
-                    console.log('Please enter the name of the Team Manager!');
-                    return false;
-                }
-            }
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "manager",
+        message: "What is the name of the Team Manager?  (required)",
+        validate: (managerInput) => {
+          if (managerInput) {
+            return true;
+          } else {
+            console.log("Please enter the name of the Team Manager!");
+            return false;
+          }
         },
-        {
-            type: 'input',
-            name: 'employeeId',
-            message: 'What is the Employee ID number?  (required)',
-            validate: employeeIdInput => {
-                if (employeeIdInput) {
-                    return true;
-                } else {
-                    console.log('Please enter the Employee ID!');
-                    return false;
-                }
-            }
+      },
+      {
+        type: "input",
+        name: "employeeId",
+        message: "What is the Employee ID number?  (required)",
+        validate: (employeeIdInput) => {
+          if (employeeIdInput) {
+            return true;
+          } else {
+            console.log("Please enter the Employee ID!");
+            return false;
+          }
         },
-        {
-            type: 'input',
-            name: 'email',
-            message: 'What is the email address?  (required)',
-            validate: emailInput => {
-                if (emailInput) {
-                    return true;
-                } else {
-                    console.log('Please enter the email address!');
-                    return false;
-                }
-            }
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is the email address?  (required)",
+        validate: (emailInput) => {
+          if (emailInput) {
+            return true;
+          } else {
+            console.log("Please enter the email address!");
+            return false;
+          }
         },
-        {
-            type: 'input',
-            name: 'office',
-            message: 'What is the office number?  (required)',
-            validate: officeInput => {
-                if (officeInput) {
-                    return true;
-                } else {
-                    console.log('Please enter the office number!');
-                    return false;
-                }
-            }
-        }
-    ]).then(({manager, employeeId, email, office}) =>{
-
-
-
-    })
-
-    
+      },
+      {
+        type: "input",
+        name: "office",
+        message: "What is the office number?  (required)",
+        validate: (officeInput) => {
+          if (officeInput) {
+            return true;
+          } else {
+            console.log("Please enter the office number!");
+            return false;
+          }
+        },
+      },
+    ])
+    .then(({ manager, employeeId, email, office }) => {
+      const newManager = new Manager(manager, employeeId, email, office);
+      HTML += generateManager(newManager);
+      console.log(HTML);
+      createTeam();
+    });
 };
 
-/* 
-.then create this card
-*/
-
 const createTeam = () => {
-    return inquirer.prompt ([
-        {
-            type: 'list',
-            name: 'teamRole',
-            message: "Please select the employee's role on the team.",
-            choices: ['Engineer', 'Intern']
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "teamRole",
+        message: "Please select the employee's role on the team.",
+        choices: ["Engineer", "Intern"],
+      },
+      {
+        type: "input",
+        name: "name",
+        message: "What is the name of the Employee?  (required)",
+        validate: (employeeInput) => {
+          if (employeeInput) {
+            return true;
+          } else {
+            console.log("Please enter the name of the Employee!");
+            return false;
+          }
         },
-        {
-
-        }
+      },
+      {
+        type: "input",
+        name: "employeeId",
+        message: "What is the Employee ID number?  (required)",
+        validate: (employeeIdInput) => {
+          if (employeeIdInput) {
+            return true;
+          } else {
+            console.log("Please enter the Employee ID!");
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is the email address?  (required)",
+        validate: (emailInput) => {
+          if (emailInput) {
+            return true;
+          } else {
+            console.log("Please enter the email address!");
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "gitHub",
+        message: "What is the GitHub name?  (required)",
+        when: (input) => input.teamRole === "Engineer",
+        validate: (gitHub) => {
+          if (gitHub) {
+            return true;
+          } else {
+            console.log("Please enter the GitHub name!");
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "school",
+        message: "What is the school name?  (required)",
+        when: (input) => input.teamRole === "Intern",
+        validate: (school) => {
+          if (school) {
+            return true;
+          } else {
+            console.log("Please enter the school name!");
+            return false;
+          }
+        },
+      },
     ])
-}
+    .then(({ teamRole, name, employeeId, email, gitHub, school }) => {
+      if (teamRole === "Engineer") {
+        const newEngineer = new Engineer(name, employeeId, email, gitHub);
+        HTML += generateEngineer(newEngineer);
+        console.log(HTML);
+      } else {
+        const newIntern = new Intern(name, employeeId, email, school);
+        HTML += generateIntern(newIntern);
+        console.log(HTML);
+      }
+      addToTeam()
+    });
+};
 
-// when: (input) => input.teamRole === "Engineer"
-// when: (input) => input.teamRole === "Intern"
-// to determine last question for each
+// function to add more or exit  addToTeam();
+// if yes call createTeam()
+// if no call const HTMLFiledata = genearteHTML(HTML)  fs.writeFile("./dist/index.html",HTMLfiledata)
