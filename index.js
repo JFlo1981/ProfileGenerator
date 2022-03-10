@@ -17,11 +17,15 @@ THEN I am prompted to enter the intern’s name, ID, email, and school, and I am
 WHEN I decide to finish building my team
 THEN I exit the application, and the HTML is generated 
 */
+const fs = require('fs');
+const inquirer = require('inquirer');
 
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+
 let HTML = "";
+
 const generateManager = require("./templates/manager");
 const generateEngineer = require("./templates/engineer");
 const generateIntern = require("./templates/intern");
@@ -167,6 +171,12 @@ const createTeam = () => {
           }
         },
       },
+      {
+        type: 'confirm',
+        name: 'addEmployee',
+        message: 'Are there more employees to add to the team?',
+        default: false
+      },
     ])
     .then(({ teamRole, name, employeeId, email, gitHub, school }) => {
       if (teamRole === "Engineer") {
@@ -181,7 +191,8 @@ const createTeam = () => {
       addToTeam()
     });
 };
-
+managerSetup();
 // function to add more or exit  addToTeam();
 // if yes call createTeam()
-// if no call const HTMLFiledata = generateHTML(HTML)  fs.writeFile("./dist/index.html",HTMLfiledata)
+/* if no call const HTMLFiledata = generateHTML(HTML)  
+   fs.writeFile("./dist/index.html",HTMLfiledata) */
