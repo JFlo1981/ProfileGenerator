@@ -21,7 +21,7 @@ THEN I exit the application, and the HTML is generated
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const HTML = "";
+let HTML = "";
 const generateManager = require("./templates/manager");
 const generateEngineer = require("./templates/engineer");
 const generateIntern = require("./templates/intern");
@@ -33,7 +33,7 @@ const managerSetup = () => {
       {
         type: "input",
         name: "manager",
-        message: "What is the name of the Team Manager?  (required)",
+        message: "Who is the Team Manager?  (required)",
         validate: (managerInput) => {
           if (managerInput) {
             return true;
@@ -184,4 +184,4 @@ const createTeam = () => {
 
 // function to add more or exit  addToTeam();
 // if yes call createTeam()
-// if no call const HTMLFiledata = genearteHTML(HTML)  fs.writeFile("./dist/index.html",HTMLfiledata)
+// if no call const HTMLFiledata = generateHTML(HTML)  fs.writeFile("./dist/index.html",HTMLfiledata)
