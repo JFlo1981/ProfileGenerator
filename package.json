@@ -1,0 +1,26 @@
+{
+  "name": "profilegenerator",
+  "version": "1.0.0",
+  "description": "challenge 10 team profile generator ",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JFlo1981/ProfileGenerator.git"
+  },
+  "author": "jf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JFlo1981/ProfileGenerator/issues"
+  },
+  "homepage": "https://github.com/JFlo1981/ProfileGenerator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.1",
+    "jest": "^27.5.1"
+  }
+}
