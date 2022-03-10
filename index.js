@@ -19,15 +19,14 @@ THEN I exit the application, and the HTML is generated
 */
 
 
-/*
-const <> = require();
-        "   " 
-        "   "
-        "   "
-*/
+
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+
 
 const managerSetup = () => {
-    return inquirer.prompt([
+     inquirer.prompt([
         {
             type: 'input',
             name: 'manager',
@@ -80,7 +79,13 @@ const managerSetup = () => {
                 }
             }
         }
-    ])
+    ]).then(({manager, employeeId, email, office}) =>{
+
+
+
+    })
+
+    
 };
 
 /* 
