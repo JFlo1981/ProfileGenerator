@@ -170,13 +170,7 @@ const createTeam = () => {
             return false;
           }
         },
-      },
-      {
-        type: 'confirm',
-        name: 'addEmployee',
-        message: 'Are there more employees to add to the team?',
-        default: false
-      },
+      }
     ])
     .then(({ teamRole, name, employeeId, email, gitHub, school }) => {
       if (teamRole === "Engineer") {
@@ -190,9 +184,24 @@ const createTeam = () => {
       }
       addToTeam()
     });
-};
-managerSetup();
+    const addToTeam = () => {
+      inquirer
+        .prompt([
+          {
+          type: "confirm",
+          name: "newMember",
+          message: "Would you like to add another team member?",
+            }
+        ]).then(function(confirm){
+          confirm.newMember ? createTeam() : generateHTML(HTML)
+
+        })
+    };
+  }
+  managerSetup();
+
 // function to add more or exit  addToTeam();
 // if yes call createTeam()
-/* if no call const HTMLFiledata = generateHTML(HTML)  
-   fs.writeFile("./dist/index.html",HTMLfiledata) */
+// if no call const HTMLFiledata = generateHTML(HTML)  
+//  fs.writeFile("./dist/index.html",HTMLfiledata)
+  
