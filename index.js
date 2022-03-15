@@ -193,7 +193,8 @@ const createTeam = () => {
           message: "Would you like to add another team member?",
             }
         ]).then(function(confirm){
-          confirm.newMember ? createTeam() : generateHTML(HTML)
+          confirm.newMember ? createTeam() : HTMLFiledata = generateHTML(HTML)  
+          fs.writeFile("./dist/index.html",HTMLfiledata)
 
         })
     };
@@ -203,5 +204,5 @@ const createTeam = () => {
 // function to add more or exit  addToTeam();
 // if yes call createTeam()
 // if no call const HTMLFiledata = generateHTML(HTML)  
-//  fs.writeFile("./dist/index.html",HTMLfiledata)
+// fs.writeFile("./dist/index.html",HTMLfiledata)
   
