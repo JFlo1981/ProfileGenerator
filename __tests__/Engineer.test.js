@@ -9,7 +9,7 @@ test('create engineer object', () => {
 test('gets github id', () => {
     const engineer = new Engineer('Jarod', 81, 'jarod.florence@gmail.com', 'JFlo1981');
 
-    expect(engineer.getGitHub).toEqual(expect.stringContaining(engineer.gitHub.toString()));
+    expect(engineer.getGitHub()).toEqual(expect.stringContaining(engineer.gitHub.toString()));
 });
 
 test('get employee role', () => {
