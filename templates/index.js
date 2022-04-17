@@ -1,6 +1,6 @@
-const generateHTML =(data) => `
+const generateHTML = (data) => `
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="has-background-black">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,15 +9,15 @@ const generateHTML =(data) => `
     <title>Team Builder</title>
 </head>
 <body>
-    <header>
-        <h1>
+<header class="is-size-1 m-4 has-text-centered has-text-white">
+<h1>
             My Team
         </h1>
         
-        <p>By: Jarod Florence</p>
+        <p class="is-size-4">By: Jarod Florence</p>
     </header>
     <main>
-    <div class="tile is-ancestor">
+    <div class="tile is-ancestor is-flex-wrap-wrap m-1">
         ${data}
     </div>
     </main>
@@ -25,6 +25,6 @@ const generateHTML =(data) => `
 </body>
 </html>
 
-`
+`;
 
 module.exports = generateHTML;
