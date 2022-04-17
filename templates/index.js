@@ -9,7 +9,7 @@ const generateHTML =(data) => `
     <title>Team Builder</title>
 </head>
 <body>
-    <header >
+    <header>
         <h1>
             My Team
         </h1>

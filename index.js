@@ -191,14 +191,21 @@ const createTeam = () => {
           type: "confirm",
           name: "newMember",
           message: "Would you like to add another team member?",
+          default: false
+          }
+        ])
+        .then(({newMember}) => {
+            if (newMember) {
+              createTeam() 
+            } else {
+              const HTMLFiledata = generateHTML(HTML); 
+              fs.writeFile("./dist/index.html",HTMLFiledata,function(err){
+                if(err)throw err;
+              });
             }
-        ]).then(function(confirm){
-          confirm.newMember ? createTeam() : HTMLFiledata = generateHTML(HTML)  
-          fs.writeFile("./dist/index.html",HTMLfiledata)
-
-        })
+        });
     };
-  }
+  };
   managerSetup();
 
 // function to add more or exit  addToTeam();
